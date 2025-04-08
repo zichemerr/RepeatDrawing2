@@ -65,5 +65,6 @@ public static class G
 [Serializable]
 public class RunState
 {
-    
+    [HideInInspector] public int level;
+    public int maxLevels;
 }
