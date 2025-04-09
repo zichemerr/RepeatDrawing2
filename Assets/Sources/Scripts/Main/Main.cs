@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using System.Collections.Generic;
 using LD;
 using LD.Locator;
 using UnityEngine;
@@ -7,6 +8,7 @@ using UnityEngine.SceneManagement;
 
 public class Main : MonoBehaviour
 {
+    [SerializeField] private Transform _colors;
     [SerializeField] private RunState _run;
     
     private void Awake()
@@ -51,6 +53,14 @@ public class Main : MonoBehaviour
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
+
+    public PixelColor SpawnColor(Color color)
+    {
+        PixelColor pixelColor = Instantiate(Data.Prefabs.Color, _colors.parent);
+        pixelColor.SetColor(color);
+        G.run.colors.Add(pixelColor);
+        return pixelColor;
+    }
 }
 
 public static class G
@@ -66,5 +76,6 @@ public static class G
 public class RunState
 {
     [HideInInspector] public int level;
+    public List<PixelColor> colors = new List<PixelColor>();
     public int maxLevels;
 }

@@ -8,34 +8,34 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Sources/Scenes/Main menu.unity
     guid: 8209794967de88d4fa854bbda83db74f
-  - enabled: 1
+  - enabled: 0
     path: Assets/InternalAssets/Scenes/Scene 1.unity
     guid: 2cda990e2423bbf4892e6590ba056729
-  - enabled: 1
+  - enabled: 0
     path: Assets/InternalAssets/Scenes/Scene 2.unity
     guid: 5e3e9537639f61242b79f5a83f6204a7
-  - enabled: 1
+  - enabled: 0
     path: Assets/InternalAssets/Scenes/Scene 3.unity
     guid: 779f1efd62762c347805524976ce0e9c
-  - enabled: 1
+  - enabled: 0
     path: Assets/InternalAssets/Scenes/Scene 4.unity
     guid: 66558daf14cb047448fb9c4c78301235
-  - enabled: 1
+  - enabled: 0
     path: Assets/InternalAssets/Scenes/Scene 5.unity
     guid: d027609f8df3af84a89ac313ab49caa6
-  - enabled: 1
+  - enabled: 0
     path: Assets/InternalAssets/Scenes/Scene 6.unity
     guid: acea565ab5cbad24d85454cf7c06bf60
-  - enabled: 1
+  - enabled: 0
     path: Assets/InternalAssets/Scenes/Scene 7.unity
     guid: 4ecc72d3f7e68d0489b56afbfcfdb3cb
-  - enabled: 1
+  - enabled: 0
     path: Assets/InternalAssets/Scenes/Scene 8.unity
     guid: e81e4bc68a963cd41bbd837fda226614
-  - enabled: 1
+  - enabled: 0
     path: Assets/InternalAssets/Scenes/Scene 9.unity
     guid: 2df677143ac92df43a2f05cd8069836c
-  - enabled: 1
+  - enabled: 0
     path: Assets/InternalAssets/Scenes/Scene 10.unity
     guid: c1104fb202a056045a960c1329a7190d
   m_configObjects: {}
