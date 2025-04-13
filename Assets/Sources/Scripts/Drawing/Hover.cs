@@ -6,4 +6,14 @@ public class Hover : MonoBehaviour
     {
         transform.position = position;
     }
+
+    public void Enable()
+    {
+        gameObject.SetActive(true);
+    }
+    
+    public void Disable()
+    {
+        gameObject.SetActive(false);
+    }
 }

@@ -2,12 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ColorSetAlign : BaseInteraction
+public class ColorSetAlign : MonoBehaviour
 {
     public float width = 1f;
 
-    public override int Priority => 15;
-
+    [ContextMenu("Align")]
     public void Init()
     {
         var centerOffset = width * (G.run.colors.Count * 0.5f - 0.5f);

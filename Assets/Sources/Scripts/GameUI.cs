@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class GameUI : BaseInteraction
+public class GameUI : MonoBehaviour
 {
     [SerializeField] private GameObject _mainMenu;
     [SerializeField] private GameObject _level;

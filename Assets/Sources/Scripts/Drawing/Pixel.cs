@@ -3,14 +3,10 @@ using UnityEngine;
 
 public class Pixel : MonoBehaviour
 {
-    private SpriteRenderer _spriteRenderer;
+    [SerializeField] private SpriteRenderer _spriteRenderer;
     
     public event Action<Pixel> Clicked;
-
-    private void Awake()
-    {
-        _spriteRenderer = GetComponent<SpriteRenderer>();
-    }
+    public Color color => _spriteRenderer.color;
 
     private void OnMouseDown()
     {

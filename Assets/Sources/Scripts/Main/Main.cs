@@ -5,9 +5,12 @@ using LD;
 using LD.Locator;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.Serialization;
 
 public class Main : MonoBehaviour
 {
+    [SerializeField] private ColorSetAlign _align;
+    [SerializeField] private GameUI _gameUI;
     [SerializeField] private Transform _colors;
     [SerializeField] private RunState _run;
     
@@ -17,26 +20,25 @@ public class Main : MonoBehaviour
         G.main = this;
             
         Interactor interactor = new Interactor();
-        ServiceLocator<IService> serviceLocator = new ServiceLocator<IService>();
         
         interactor.Init();
         G.interactor = interactor;
-        G.locator = serviceLocator;
         G.run = _run;
-
-        foreach (var interaction in G.interactor.FindAll<BaseInteraction>())
-            serviceLocator.Register(interaction);
-        
-        G.ui = G.locator.Get<GameUI>();
+        G.run.Init();
+        G.ui = _gameUI;
     }
 
     private IEnumerator Start()
     {
+        //load:
+        foreach (var pixel in G.run.pixels)
+            pixel.Clicked += PixelOnClicked;
+        
+        SpawnHover();
+        
         foreach (var encounterStart in G.interactor.FindAll<IOnEncounterStart>())
             yield return encounterStart.OnEncounterStart();
-            
-        //load:
-            
+        
         foreach (var encounterReady in G.interactor.FindAll<IOnEncounterReady>())
             yield return encounterReady.OnEncounterReady();
     }
@@ -61,6 +63,53 @@ public class Main : MonoBehaviour
         G.run.colors.Add(pixelColor);
         return pixelColor;
     }
+    
+    public void OnClickLevel(int level)
+    {
+        G.run.level = level;
+        G.ui.DrawLevel();
+
+        foreach (var color in G.run.color)
+            SpawnColor(color).Clicked += OnClicked;
+        
+        _align.Init();
+        
+        var interactors = G.interactor.FindAll<IOnLevelStart>();
+
+        foreach (var interactor in interactors)
+            StartCoroutine(interactor.OnLevelStart(CMS.Get<DrawsEntity>()));
+    }
+
+    private void PixelOnClicked(Pixel pixel)
+    {
+        var inter = G.interactor.FindAll<IOnDraw>();
+
+        foreach (var interactor in inter)
+            StartCoroutine(interactor.OnDraw(pixel));
+    }
+
+    public IEnumerator OnBackClick()
+    {
+        foreach (var color in G.run.colors)
+            color.Clicked -= OnClicked;
+        
+        yield break;
+    }
+
+    private void OnClicked(PixelColor color)
+    {
+        var inter = G.interactor.FindAll<IOnColorSelect>();
+
+        foreach (var interactor in inter)
+            StartCoroutine(interactor.OnColorSelect(color));
+    }
+
+    public void SpawnHover()
+    {
+        Hover hover = Instantiate(Data.Prefabs.Hover);
+        G.run.hover = hover;
+        hover.Disable();
+    }
 }
 
 public static class G
@@ -75,7 +124,17 @@ public static class G
 [Serializable]
 public class RunState
 {
+    public PixelColor currentColor;
+    public Pixel[] pixels;
+    [FormerlySerializedAs("pixelsOpponent")] [FormerlySerializedAs("pixelsSecond")] public Pixel[] referencePixels;
+    public Color[] color;
+    public List<PixelColor> colors;
     [HideInInspector] public int level;
-    public List<PixelColor> colors = new List<PixelColor>();
     public int maxLevels;
+    public Hover hover;
+
+    public void Init()
+    {
+        colors = new List<PixelColor>();
+    }
 }

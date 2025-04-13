@@ -1,21 +1,27 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
+using LD;
 using UnityEngine;
 
 public class Interactor
 {
-    private List<BaseInteraction> _interactions = new List<BaseInteraction>();
-    
+    private List<BaseInteraction> _interactions;
+        
     public void Init()
     {
-        BaseInteraction[] interactions = GameObject.FindObjectsOfType<BaseInteraction>();
+        var subs = ReflectionUtil.FindAllSubslasses<BaseInteraction>();
+        _interactions = new List<BaseInteraction>();
 
-        foreach (var interactor in interactions)
-            _interactions.Add(interactor);
-        
+        foreach (var type in subs)
+        {
+            var interaction = (BaseInteraction)Activator.CreateInstance(type);
+            _interactions.Add(interaction);
+        }
+            
         _interactions = _interactions.OrderByDescending(i => i.Priority).ToList();
     }
-    
+
     public List<T> FindAll<T>() where T : class
     {
         return _interactions.OfType<T>().ToList();
