@@ -23,4 +23,9 @@ public class PixelColor : MonoBehaviour
     {
         _spriteRenderer.color = color;
     }
+
+    public void Destroy()
+    {
+        Destroy(gameObject);
+    }
 }
