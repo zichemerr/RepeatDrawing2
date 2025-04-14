@@ -11,6 +11,7 @@ public class PixelColor : MonoBehaviour
 
     private void Awake()
     {
+        //Ты здесь потому-что тут ошибка, а я делаю русский, так-что сам чини лох :)
         _spriteRenderer = GetComponent<SpriteRenderer>();
     }
 

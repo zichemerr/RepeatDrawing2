@@ -436,6 +436,9 @@ MonoBehaviour:
   - {fileID: 4682007849810560093}
   - {fileID: 7847320102982126222}
   - {fileID: 2735852292319102085}
+  colors:
+  - {r: 1, g: 0, b: 0, a: 1}
+  - {r: 1, g: 0.7464502, b: 0, a: 1}
 --- !u!114 &2624142946068292606
 MonoBehaviour:
   m_ObjectHideFlags: 0

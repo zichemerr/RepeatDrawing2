@@ -6,6 +6,7 @@ using LD.Locator;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.Serialization;
+using UnityEngine.UIElements;
 
 public class Main : MonoBehaviour
 {
@@ -69,15 +70,23 @@ public class Main : MonoBehaviour
         G.run.level = level;
         G.ui.DrawLevel();
 
-        foreach (var color in G.run.color)
-            SpawnColor(color).Clicked += OnClicked;
-        
-        _align.Init();
-        
-        var interactors = G.interactor.FindAll<IOnLevelStart>();
+        var en = CMS.Get<DrawsEntity>();
 
-        foreach (var interactor in interactors)
-            StartCoroutine(interactor.OnLevelStart(CMS.Get<DrawsEntity>()));
+        if (en.Is<TagDraws>(out var tag))
+        {
+            int index = G.run.level - 1;
+            Color[] colors = tag.draws[index].colors;
+                
+            foreach (var color in colors)
+                SpawnColor(color).Clicked += OnClicked;
+        
+            _align.Init();
+        
+            var interactors = G.interactor.FindAll<IOnLevelStart>();
+
+            foreach (var interactor in interactors)
+                StartCoroutine(interactor.OnLevelStart(en));
+        }
     }
 
     private void PixelOnClicked(Pixel pixel)
@@ -88,11 +97,36 @@ public class Main : MonoBehaviour
             StartCoroutine(interactor.OnDraw(pixel));
     }
 
+    public void OnBack()
+    {
+        StartCoroutine(OnBackClick());
+    }
+    
     public IEnumerator OnBackClick()
     {
         foreach (var color in G.run.colors)
             color.Clicked -= OnClicked;
+
+        RestartGame();
+        yield break;
+    }
+
+    public void OnNext()
+    {
+        StartCoroutine(OnNextClick());
+    }
+
+    public IEnumerator OnNextClick()
+    {
+        if (G.run.level == G.run.maxLevels)
+            yield break;
         
+        foreach (var color in G.run.colors)
+            color.Destroy();
+        
+        G.run.colors.Clear();
+        G.run.level++;
+        OnClickLevel(G.run.level);
         yield break;
     }
 
@@ -126,7 +160,7 @@ public class RunState
 {
     public PixelColor currentColor;
     public Pixel[] pixels;
-    [FormerlySerializedAs("pixelsOpponent")] [FormerlySerializedAs("pixelsSecond")] public Pixel[] referencePixels;
+    public Pixel[] referencePixels;
     public Color[] color;
     public List<PixelColor> colors;
     [HideInInspector] public int level;
