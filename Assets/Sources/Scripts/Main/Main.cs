@@ -201,7 +201,7 @@ public class StarsLoaderInteractor : BaseInteraction, IOnEncounterStart
 {
     public IEnumerator OnEncounterStart()
     {
-        for (int i = 0; i < G.run.stars.Count; i++)
+        for (int i = 0; i < G.run.stars.Count + 1; i++)
         {
             int index = YandexGame.savesData.indexes[i];
             
