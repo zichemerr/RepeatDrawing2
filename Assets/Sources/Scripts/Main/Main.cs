@@ -5,8 +5,6 @@ using LD;
 using LD.Locator;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using UnityEngine.Serialization;
-using UnityEngine.UIElements;
 
 public class Main : MonoBehaviour
 {
@@ -49,6 +47,16 @@ public class Main : MonoBehaviour
 #if UNITY_EDITOR            
         if (Input.GetKeyDown(KeyCode.R))
             RestartGame();
+
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            var draw = Instantiate(Data.Prefabs.FirstDrawing);
+            
+            foreach (var pixel in draw.pixels)
+            {
+                pixel.SetColor(Color.gray);
+            }
+        }
 #endif
     }
 
@@ -81,6 +89,7 @@ public class Main : MonoBehaviour
                 SpawnColor(color).Clicked += OnClicked;
         
             _align.Init();
+            OnClicked(G.run.colors[0]);
         
             var interactors = G.interactor.FindAll<IOnLevelStart>();
 
@@ -119,7 +128,11 @@ public class Main : MonoBehaviour
     public IEnumerator OnNextClick()
     {
         if (G.run.level == G.run.maxLevels)
+        {
+            Debug.Log("Все уровни пройденны");
+            RestartGame();
             yield break;
+        }
         
         foreach (var color in G.run.colors)
             color.Destroy();
@@ -127,7 +140,6 @@ public class Main : MonoBehaviour
         G.run.colors.Clear();
         G.run.level++;
         OnClickLevel(G.run.level);
-        yield break;
     }
 
     private void OnClicked(PixelColor color)

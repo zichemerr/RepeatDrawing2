@@ -10,7 +10,15 @@ public class DrawsEntity : CMSEntity
         List<Draw> draws = new List<Draw>();
         
         draws.Add(Data.Prefabs.FirstDrawing);
-        draws.Add(Data.Prefabs.FirstDrawing2);
+        draws.Add(Data.Prefabs.FirstDrawing_1);
+        draws.Add(Data.Prefabs.FirstDrawing_2);
+        draws.Add(Data.Prefabs.FirstDrawing_3);
+        draws.Add(Data.Prefabs.FirstDrawing_4);
+        draws.Add(Data.Prefabs.FirstDrawing_5);
+        draws.Add(Data.Prefabs.FirstDrawing_6);
+        draws.Add(Data.Prefabs.FirstDrawing_7);
+        draws.Add(Data.Prefabs.FirstDrawing_8);
+        draws.Add(Data.Prefabs.FirstDrawing_9);
         
         Define<TagDraws>().draws = draws;
     }

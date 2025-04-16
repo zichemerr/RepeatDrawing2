@@ -1073,7 +1073,7 @@ GameObject:
   - component: {fileID: 7528155057831085299}
   - component: {fileID: 7439443392062984094}
   m_Layer: 0
-  m_Name: FirstDrawing
+  m_Name: FirstDrawing 5
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
