@@ -173,7 +173,6 @@ public class RunState
     public PixelColor currentColor;
     public Pixel[] pixels;
     public Pixel[] referencePixels;
-    public Color[] color;
     public List<PixelColor> colors;
     [HideInInspector] public int level;
     public int maxLevels;
