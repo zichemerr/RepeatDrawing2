@@ -16,6 +16,7 @@ namespace YG
         public int level = 0;                       // Можно задать полям значения по умолчанию
         public string newPlayerName = "Hello!";
         public bool[] openLevels = new bool[3];
+        public int[] indexes;
 
         // Ваши сохранения
 
@@ -28,7 +29,8 @@ namespace YG
         public SavesYG()
         {
             // Допустим, задать значения по умолчанию для отдельных элементов массива
-
+            
+            indexes = new int[15];
             openLevels[1] = true;
         }
     }

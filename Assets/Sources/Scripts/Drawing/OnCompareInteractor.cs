@@ -10,6 +10,7 @@ public class OnCompareInteractor : BaseInteraction, IOnDraw
         if (CheckCompare(G.run.pixels, G.run.referencePixels))
         {
             G.ui.nextButton.gameObject.SetActive(true);
+            G.run.EnableStar(G.run.level);
         }
         else
         {

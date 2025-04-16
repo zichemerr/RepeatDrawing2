@@ -1,10 +1,12 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using LD;
 using LD.Locator;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using YG;
 
 public class Main : MonoBehaviour
 {
@@ -44,18 +46,12 @@ public class Main : MonoBehaviour
 
     private void Update()
     {
-#if UNITY_EDITOR            
+#if UNITY_EDITOR
         if (Input.GetKeyDown(KeyCode.R))
-            RestartGame();
-
-        if (Input.GetKeyDown(KeyCode.Space))
         {
-            var draw = Instantiate(Data.Prefabs.FirstDrawing);
-            
-            foreach (var pixel in draw.pixels)
-            {
-                pixel.SetColor(Color.gray);
-            }
+            YandexGame.ResetSaveProgress();
+            YandexGame.SaveProgress();
+            RestartGame();
         }
 #endif
     }
@@ -170,6 +166,7 @@ public static class G
 [Serializable]
 public class RunState
 {
+    [SerializeField] private Star[] _stars;
     public PixelColor currentColor;
     public Pixel[] pixels;
     public Pixel[] referencePixels;
@@ -177,9 +174,43 @@ public class RunState
     [HideInInspector] public int level;
     public int maxLevels;
     public Hover hover;
+    public Dictionary<int, Star> stars;
 
     public void Init()
     {
         colors = new List<PixelColor>();
+        stars = _stars.ToDictionary(KeySelector);
+    }
+
+    private int index = 0;
+    private int KeySelector(Star stat)
+    {
+        index++;
+        return index;
+    }
+
+    public void EnableStar(int key)
+    {
+        stars[key].Enable();
+        YandexGame.savesData.indexes[key] = key;
+        YandexGame.SaveProgress();
+    }
+}
+
+public class StarsLoaderInteractor : BaseInteraction, IOnEncounterStart
+{
+    public IEnumerator OnEncounterStart()
+    {
+        for (int i = 0; i < G.run.stars.Count; i++)
+        {
+            int index = YandexGame.savesData.indexes[i];
+            
+            if (index == 0)
+                continue;
+            
+            G.run.stars[index].Enable();
+        }
+        
+        yield break;
     }
 }
