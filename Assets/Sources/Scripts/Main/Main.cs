@@ -53,6 +53,14 @@ public class Main : MonoBehaviour
             YandexGame.SaveProgress();
             RestartGame();
         }
+
+        if (Input.GetKeyDown(KeyCode.D))
+        {
+            for (int i = 0; i < G.run.referencePixels.Length; i++)
+            {
+                G.run.pixels[i].SetColor(G.run.referencePixels[i].color);
+            }
+        }
 #endif
     }
 
@@ -112,7 +120,14 @@ public class Main : MonoBehaviour
         foreach (var color in G.run.colors)
             color.Clicked -= OnClicked;
 
-        RestartGame();
+        G.ui.DrawMenu();
+        
+        foreach (var color in G.run.colors)
+            color.Destroy();
+        
+        G.run.colors.Clear();
+        G.run.hover.Disable();
+        
         yield break;
     }
 

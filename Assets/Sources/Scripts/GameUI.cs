@@ -12,5 +12,13 @@ public class GameUI : MonoBehaviour
     {
         _mainMenu.SetActive(false);
         _level.SetActive(true);
+        backButton.gameObject.SetActive(true);
+    }
+
+    public void DrawMenu()
+    {
+        _mainMenu.SetActive(true);
+        _level.SetActive(false);
+        backButton.gameObject.SetActive(false);
     }
 }
