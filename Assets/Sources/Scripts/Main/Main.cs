@@ -26,6 +26,7 @@ public class Main : MonoBehaviour
         G.interactor = interactor;
         G.run = _run;
         G.run.Init();
+        _gameUI.Init();
         G.ui = _gameUI;
     }
 

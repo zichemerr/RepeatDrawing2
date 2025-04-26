@@ -6914,6 +6914,7 @@ GameObject:
   - component: {fileID: 428260537}
   - component: {fileID: 428260540}
   - component: {fileID: 428260539}
+  - component: {fileID: 428260541}
   m_Layer: 0
   m_Name: Main
   m_TagString: Untagged
@@ -6948,10 +6949,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2a53e3d1b6234cbc8ac6b0c31d4e4d41, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _background: {fileID: 1829371411}
   _mainMenu: {fileID: 608576785}
   _level: {fileID: 209215003}
   backButton: {fileID: 2004621853181490058}
   nextButton: {fileID: 3608942705798517947}
+  background: {fileID: 21300000, guid: 1d946409523222c47a2df955d8b532ea, type: 3}
+  backgroundBlur: {fileID: 21300000, guid: 260701e5d0efeda4c89c6867579a4900, type: 3}
 --- !u!114 &428260540
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7114,6 +7118,24 @@ MonoBehaviour:
     level: 0
     maxLevels: 10
     hover: {fileID: 0}
+--- !u!114 &428260541
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 428260536}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ecee6b3e6735b6d4ca901064697c5dbe, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  audioSource: {fileID: 767000939}
+  musicClip:
+  - audioClip: {fileID: 8300000, guid: ff357a69d3f32f6498ac929a1cfb64c8, type: 3}
+    time: 191
+  - audioClip: {fileID: 8300000, guid: 0401c88b10d53154bb0a6223bdf44a50, type: 3}
+    time: 352
 --- !u!1 &448499372
 GameObject:
   m_ObjectHideFlags: 0
@@ -10932,10 +10954,10 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 13fb2fd9ab9e4a24f995767b9d3f45cc, type: 3}
-  m_PlayOnAwake: 1
+  m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
-  Loop: 1
+  Loop: 0
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
