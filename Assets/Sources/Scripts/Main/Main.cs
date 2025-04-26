@@ -10,7 +10,7 @@ using YG;
 
 public class Main : MonoBehaviour
 {
-    [SerializeField] private ColorSetAlign _align;
+    [SerializeField] private ColorSetAlign _setAlign;
     [SerializeField] private GameUI _gameUI;
     [SerializeField] private Transform _colors;
     [SerializeField] private RunState _run;
@@ -93,8 +93,8 @@ public class Main : MonoBehaviour
                 
             foreach (var color in colors)
                 SpawnColor(color).Clicked += OnClicked;
-        
-            _align.Init();
+            
+            _setAlign.Init();
             OnClicked(G.run.colors[0]);
         
             var interactors = G.interactor.FindAll<IOnLevelStart>();
@@ -169,7 +169,7 @@ public class Main : MonoBehaviour
 
     public void SpawnHover()
     {
-        Hover hover = Instantiate(Data.Prefabs.Hover);
+        Hover hover = Instantiate(Data.Prefabs.Hover, _colors.parent);
         G.run.hover = hover;
         hover.Disable();
     }

@@ -1,18 +1,15 @@
 using System;
 using UnityEngine;
+using UnityEngine.EventSystems;
+using UnityEngine.UI;
 
-public class PixelColor : MonoBehaviour
+public class PixelColor : MonoBehaviour, IPointerDownHandler
 {
-    [SerializeField] private SpriteRenderer _spriteRenderer;
+    [SerializeField] private Image _spriteRenderer;
     
     public event Action<PixelColor> Clicked;
     public Vector2 position => transform.position;
     public Color color => _spriteRenderer.color;
-    
-    private void OnMouseDown()
-    {
-        Clicked?.Invoke(this);
-    }
 
     public void SetColor(Color color)
     {
@@ -22,5 +19,11 @@ public class PixelColor : MonoBehaviour
     public void Destroy()
     {
         Destroy(gameObject);
+    }
+
+    public void OnPointerDown(PointerEventData eventData)
+    {
+        Clicked?.Invoke(this);
+        Debug.Log("def");
     }
 }
