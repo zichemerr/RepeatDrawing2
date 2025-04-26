@@ -20,7 +20,7 @@ public class MusicPlayer : MonoBehaviour
 
     public IEnumerator StartTimer()
     {
-        while (true)
+        while (true)    
         {
             _time -= Time.deltaTime;
             

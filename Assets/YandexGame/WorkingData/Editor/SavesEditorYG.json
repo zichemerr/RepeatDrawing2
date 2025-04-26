@@ -1,7 +1,7 @@
 {
-    "idSave": 254,
+    "idSave": 259,
     "isFirstSession": false,
-    "language": "en",
+    "language": "ru",
     "promptDone": false,
     "money": 1,
     "level": 0,
@@ -13,7 +13,7 @@
     ],
     "indexes": [
         0,
-        1,
+        0,
         0,
         0,
         0,
