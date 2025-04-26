@@ -79,6 +79,7 @@ public class Main : MonoBehaviour
     
     public void OnClickLevel(int level)
     {
+        YandexGame.FullscreenShow();
         G.run.level = level;
         G.ui.DrawLevel();
 
@@ -117,6 +118,8 @@ public class Main : MonoBehaviour
     
     public IEnumerator OnBackClick()
     {
+        YandexGame.FullscreenShow();
+        
         foreach (var color in G.run.colors)
             color.Clicked -= OnClicked;
 
@@ -138,6 +141,8 @@ public class Main : MonoBehaviour
 
     public IEnumerator OnNextClick()
     {
+        YandexGame.FullscreenShow();
+        
         if (G.run.level == G.run.maxLevels)
         {
             Debug.Log("Все уровни пройденны");

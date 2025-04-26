@@ -12,10 +12,6 @@ public class OnCompareInteractor : BaseInteraction, IOnDraw
             G.ui.nextButton.gameObject.SetActive(true);
             G.run.EnableStar(G.run.level);
         }
-        else
-        {
-            Debug.Log("No");
-        }
         
         yield break;
     }
