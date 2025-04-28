@@ -4,8 +4,10 @@ using System.Collections.Generic;
 using System.Linq;
 using LD;
 using LD.Locator;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.Serialization;
 using YG;
 
 public class Main : MonoBehaviour
@@ -14,6 +16,10 @@ public class Main : MonoBehaviour
     [SerializeField] private GameUI _gameUI;
     [SerializeField] private Transform _colors;
     [SerializeField] private RunState _run;
+
+    public MovableSmoothDamp buttons;
+    public AudioClip draw;
+    public AudioClip select;
     
     private void Awake()
     {
@@ -21,13 +27,16 @@ public class Main : MonoBehaviour
         G.main = this;
             
         Interactor interactor = new Interactor();
+        AudioSystem audioSystem = new AudioSystem();
         
         interactor.Init();
         G.interactor = interactor;
         G.run = _run;
         G.run.Init();
+        G.audio = audioSystem;
         _gameUI.Init();
         G.ui = _gameUI;
+        buttons.targetPosition = G.run.firstPoint.position;
     }
 
     private IEnumerator Start()
@@ -95,7 +104,11 @@ public class Main : MonoBehaviour
                 SpawnColor(color).Clicked += OnClicked;
             
             _setAlign.Init();
-            OnClicked(G.run.colors[0]);
+            
+            var inter = G.interactor.FindAll<IOnColorSelect>();
+
+            foreach (var interactor in inter)
+                StartCoroutine(interactor.OnColorSelect(G.run.colors[0]));
         
             var interactors = G.interactor.FindAll<IOnLevelStart>();
 
@@ -104,8 +117,17 @@ public class Main : MonoBehaviour
         }
     }
 
+    private float lastTime;
+    private float cooldownTime = 0.05f;
+    
     private void PixelOnClicked(Pixel pixel)
     {
+        if (pixel.color != G.run.currentColor.color && Time.time - lastTime >= cooldownTime)
+        {
+            G.audio.Play(draw, 0.5f);
+            lastTime = Time.time;
+        }
+        
         var inter = G.interactor.FindAll<IOnDraw>();
 
         foreach (var interactor in inter)
@@ -119,6 +141,7 @@ public class Main : MonoBehaviour
     
     public IEnumerator OnBackClick()
     {
+        G.audio.Play(Data.Sound.Click);
         YandexGame.FullscreenShow();
         
         foreach (var color in G.run.colors)
@@ -142,6 +165,7 @@ public class Main : MonoBehaviour
 
     public IEnumerator OnNextClick()
     {
+        G.audio.Play(Data.Sound.Click);
         YandexGame.FullscreenShow();
         
         if (G.run.level == G.run.maxLevels)
@@ -161,10 +185,23 @@ public class Main : MonoBehaviour
 
     private void OnClicked(PixelColor color)
     {
+        G.audio.Play(select);
         var inter = G.interactor.FindAll<IOnColorSelect>();
 
         foreach (var interactor in inter)
             StartCoroutine(interactor.OnColorSelect(color));
+    }
+    
+    public void OnArrow()
+    {
+        StartCoroutine(OnClickArrow());
+    }
+    
+    private IEnumerator OnClickArrow()
+    {
+        var inters = G.interactor.FindAll<IOnArrowClick>();
+        foreach (var interactor in inters)
+            yield return interactor.OnArrowClick();
     }
 
     public void SpawnHover()
@@ -182,6 +219,7 @@ public static class G
     public static IServiceLocator<IService> locator;
     public static RunState run;
     public static GameUI ui;
+    public static AudioSystem audio;
 }
 
 [Serializable]
@@ -196,6 +234,8 @@ public class RunState
     public int maxLevels;
     public Hover hover;
     public Dictionary<int, Star> stars;
+    public Transform firstPoint;
+    public Transform secondPoint;
 
     public void Init()
     {

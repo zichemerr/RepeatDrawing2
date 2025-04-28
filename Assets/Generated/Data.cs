@@ -11,6 +11,10 @@ public static class Data
         {
         }
     }
+    public static class Musics
+    {
+        public static AudioClip C418___Haggstorm_OST_Minecraft_66193370 => Resources.Load<AudioClip>("Musics/C418_-_Haggstorm_OST_Minecraft_66193370");
+    }
     public static class Prefabs
     {
         public static AudioSourceContainer AudioContainer => Resources.Load<AudioSourceContainer>("Prefabs/AudioContainer");
@@ -28,8 +32,19 @@ public static class Data
         public static Hover Hover => Resources.Load<Hover>("Prefabs/Hover");
         public static Pixel Pixel => Resources.Load<Pixel>("Prefabs/Pixel");
     }
+    public static class Sound
+    {
+        public static AudioClip Click => Resources.Load<AudioClip>("Sound/Click");
+        public static AudioClip Draw => Resources.Load<AudioClip>("Sound/Draw");
+        public static AudioClip Draw2 => Resources.Load<AudioClip>("Sound/Draw2");
+        public static AudioClip Draw3 => Resources.Load<AudioClip>("Sound/Draw3");
+        public static AudioClip Select => Resources.Load<AudioClip>("Sound/Select");
+    }
     public static class Sprites
     {
+        public static Sprite Background => Resources.Load<Sprite>("Sprites/Background");
+        public static Sprite BackgroundBlur => Resources.Load<Sprite>("Sprites/BackgroundBlur");
         public static Sprite Hover => Resources.Load<Sprite>("Sprites/Hover");
+        public static Sprite Minecraft_Bedrock_2023_upscale_1536x1536 => Resources.Load<Sprite>("Sprites/Minecraft_Bedrock_2023_upscale-1536x1536");
     }
 }

@@ -9,6 +9,8 @@ public class GameUI : MonoBehaviour
     [SerializeField] private GameObject _level;
     public ButtonManager backButton;
     public ButtonManager nextButton;
+    public Arrow leftArrow;
+    public Arrow rightArrow;
     
     public Sprite background;
     public Sprite backgroundBlur;
