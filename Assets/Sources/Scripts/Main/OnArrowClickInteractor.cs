@@ -1,4 +1,5 @@
 using System.Collections;
+using DG.Tweening;
 using UnityEngine;
 
 public class OnArrowClickInteractor : BaseInteraction, IOnArrowClick, IOnEncounterStart
@@ -10,19 +11,21 @@ public class OnArrowClickInteractor : BaseInteraction, IOnArrowClick, IOnEncount
         if (leftPosition)
         {
             G.ui.rightArrow.Disable();
-            G.ui.leftArrow.Enable();
-            G.main.buttons.targetPosition = G.run.secondPoint.position;
+            G.main.buttons.DOMove(G.run.secondPoint.position, 0.6f).SetEase(Ease.OutQuad);
             leftPosition = false;
+            
+            yield return new WaitForSeconds(0.7f);
+            G.ui.leftArrow.Enable();
         }
         else
         {
-            G.ui.rightArrow.Enable();
             G.ui.leftArrow.Disable();
-            G.main.buttons.targetPosition = G.run.firstPoint.position;
+            G.main.buttons.DOMove(G.run.firstPoint.position, 0.6f).SetEase(Ease.OutQuad);
             leftPosition = true;
+            
+            yield return new WaitForSeconds(0.7f);
+            G.ui.rightArrow.Enable();
         }
-        
-        yield break;
     }
 
     public IEnumerator OnEncounterStart()

@@ -4,10 +4,8 @@ using System.Collections.Generic;
 using System.Linq;
 using LD;
 using LD.Locator;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using UnityEngine.Serialization;
 using YG;
 
 public class Main : MonoBehaviour
@@ -17,7 +15,7 @@ public class Main : MonoBehaviour
     [SerializeField] private Transform _colors;
     [SerializeField] private RunState _run;
 
-    public MovableSmoothDamp buttons;
+    public Transform buttons;
     public AudioClip draw;
     public AudioClip select;
     
@@ -36,7 +34,6 @@ public class Main : MonoBehaviour
         G.audio = audioSystem;
         _gameUI.Init();
         G.ui = _gameUI;
-        buttons.targetPosition = G.run.firstPoint.position;
     }
 
     private IEnumerator Start()
