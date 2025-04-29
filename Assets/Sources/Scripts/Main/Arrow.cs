@@ -1,6 +1,3 @@
-using Michsky.MUIP;
-using UnityEngine;
-using UnityEngine.UI;
 using UnityEngine;
 
 public class Arrow : MonoBehaviour

@@ -30,7 +30,7 @@ namespace YG
         {
             // Допустим, задать значения по умолчанию для отдельных элементов массива
             
-            indexes = new int[15];
+            indexes = new int[25];
             openLevels[1] = true;
         }
     }

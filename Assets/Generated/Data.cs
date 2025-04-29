@@ -17,9 +17,20 @@ public static class Data
     }
     public static class Prefabs
     {
+        public static Arrow Arrow_Button => Resources.Load<Arrow>("Prefabs/Arrow Button");
         public static AudioSourceContainer AudioContainer => Resources.Load<AudioSourceContainer>("Prefabs/AudioContainer");
         public static PixelColor Color => Resources.Load<PixelColor>("Prefabs/Color");
         public static Draw FirstDrawing_1 => Resources.Load<Draw>("Prefabs/FirstDrawing 1");
+        public static Draw FirstDrawing_10 => Resources.Load<Draw>("Prefabs/FirstDrawing 10");
+        public static Draw FirstDrawing_11 => Resources.Load<Draw>("Prefabs/FirstDrawing 11");
+        public static Draw FirstDrawing_12 => Resources.Load<Draw>("Prefabs/FirstDrawing 12");
+        public static Draw FirstDrawing_13 => Resources.Load<Draw>("Prefabs/FirstDrawing 13");
+        public static Draw FirstDrawing_14 => Resources.Load<Draw>("Prefabs/FirstDrawing 14");
+        public static Draw FirstDrawing_15 => Resources.Load<Draw>("Prefabs/FirstDrawing 15");
+        public static Draw FirstDrawing_16 => Resources.Load<Draw>("Prefabs/FirstDrawing 16");
+        public static Draw FirstDrawing_17 => Resources.Load<Draw>("Prefabs/FirstDrawing 17");
+        public static Draw FirstDrawing_18 => Resources.Load<Draw>("Prefabs/FirstDrawing 18");
+        public static Draw FirstDrawing_19 => Resources.Load<Draw>("Prefabs/FirstDrawing 19");
         public static Draw FirstDrawing_2 => Resources.Load<Draw>("Prefabs/FirstDrawing 2");
         public static Draw FirstDrawing_3 => Resources.Load<Draw>("Prefabs/FirstDrawing 3");
         public static Draw FirstDrawing_4 => Resources.Load<Draw>("Prefabs/FirstDrawing 4");

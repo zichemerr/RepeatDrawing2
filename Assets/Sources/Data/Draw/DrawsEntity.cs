@@ -20,6 +20,17 @@ public class DrawsEntity : CMSEntity
         draws.Add(Data.Prefabs.FirstDrawing_8);
         draws.Add(Data.Prefabs.FirstDrawing_9);
         
+        draws.Add(Data.Prefabs.FirstDrawing_10);
+        draws.Add(Data.Prefabs.FirstDrawing_11);
+        draws.Add(Data.Prefabs.FirstDrawing_12);
+        draws.Add(Data.Prefabs.FirstDrawing_13);
+        draws.Add(Data.Prefabs.FirstDrawing_14);
+        draws.Add(Data.Prefabs.FirstDrawing_15);
+        draws.Add(Data.Prefabs.FirstDrawing_16);
+        draws.Add(Data.Prefabs.FirstDrawing_17);
+        draws.Add(Data.Prefabs.FirstDrawing_18);
+        draws.Add(Data.Prefabs.FirstDrawing_19);
+        
         Define<TagDraws>().draws = draws;
     }
 }

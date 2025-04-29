@@ -12,7 +12,7 @@ public class Main : MonoBehaviour
 {
     [SerializeField] private ColorSetAlign _setAlign;
     [SerializeField] private GameUI _gameUI;
-    [SerializeField] private Transform _colors;
+    [SerializeField] private Transform _colorsParent;
     [SerializeField] private RunState _run;
 
     public Transform buttons;
@@ -78,7 +78,7 @@ public class Main : MonoBehaviour
 
     public PixelColor SpawnColor(Color color)
     {
-        PixelColor pixelColor = Instantiate(Data.Prefabs.Color, _colors.parent);
+        PixelColor pixelColor = Instantiate(Data.Prefabs.Color, _colorsParent.parent);
         pixelColor.SetColor(color);
         G.run.colors.Add(pixelColor);
         return pixelColor;
@@ -203,7 +203,7 @@ public class Main : MonoBehaviour
 
     public void SpawnHover()
     {
-        Hover hover = Instantiate(Data.Prefabs.Hover, _colors.parent);
+        Hover hover = Instantiate(Data.Prefabs.Hover, _colorsParent.parent);
         G.run.hover = hover;
         hover.Disable();
     }
@@ -252,23 +252,5 @@ public class RunState
         stars[key].Enable();
         YandexGame.savesData.indexes[key] = key;
         YandexGame.SaveProgress();
-    }
-}
-
-public class StarsLoaderInteractor : BaseInteraction, IOnEncounterStart
-{
-    public IEnumerator OnEncounterStart()
-    {
-        for (int i = 0; i < G.run.stars.Count + 1; i++)
-        {
-            int index = YandexGame.savesData.indexes[i];
-            
-            if (index == 0)
-                continue;
-            
-            G.run.stars[index].Enable();
-        }
-        
-        yield break;
     }
 }
