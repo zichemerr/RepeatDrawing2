@@ -46,8 +46,6 @@ public static class Data
     public static class Sound
     {
         public static AudioClip Click => Resources.Load<AudioClip>("Sound/Click");
-        public static AudioClip Draw => Resources.Load<AudioClip>("Sound/Draw");
-        public static AudioClip Draw2 => Resources.Load<AudioClip>("Sound/Draw2");
         public static AudioClip Draw3 => Resources.Load<AudioClip>("Sound/Draw3");
         public static AudioClip Select => Resources.Load<AudioClip>("Sound/Select");
     }
